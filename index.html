@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Checklist e Garantias</title>
+<style>
+:root{--bg:#f4f5f8;--c:#fff;--t:#1c2330;--m:#677084;--b:#dde1e9;--p:#1f5fbf;--ok:#16794a;--okb:#dcf3e6;--w:#8a5a00;--wb:#fdf0cf;--e:#b3261e;--eb:#fbe0de}
+@media(prefers-color-scheme:dark){:root{--bg:#12151b;--c:#1b2029;--t:#e8ecf3;--m:#97a1b3;--b:#2c3341;--p:#6ea2ff;--ok:#6fd4a0;--okb:#143726;--w:#f0c45f;--wb:#3a2f10;--e:#ff9b92;--eb:#431a17}}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;font:15px/1.4 system-ui,sans-serif;background:var(--bg);color:var(--t)}
+header{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:10px 14px;background:var(--c);border-bottom:1px solid var(--b);position:sticky;top:0;z-index:5}
+h1{font-size:17px;margin:0;flex:1 1 auto}h3{margin:16px 0 6px;font-size:14px;color:var(--m);text-transform:uppercase;letter-spacing:.04em}
+nav{display:flex;gap:4px}main{max-width:1000px;margin:0 auto;padding:14px}
+button,input,select,textarea{font:inherit;color:inherit;background:var(--c);border:1px solid var(--b);border-radius:8px;padding:8px 10px}
+button{cursor:pointer}button.p{background:var(--p);color:#fff;border-color:var(--p)}button.on{border-color:var(--p);color:var(--p);font-weight:600}
+input,select,textarea{width:100%}input[data-up],input[data-pl]{text-transform:uppercase}input[type=checkbox]{width:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.grid.f{grid-template-columns:repeat(auto-fill,minmax(170px,1fr));margin:10px 0}
+.card{text-align:left;padding:14px;display:flex;flex-direction:column;gap:4px}.card b{font-size:28px}.card span{color:var(--m);font-size:13px}
+.bar{display:flex;gap:8px}.bar input{flex:1}.bar button{width:auto;white-space:nowrap}
+.it{background:var(--c);border:1px solid var(--b);border-radius:10px;padding:10px 12px;margin:8px 0;cursor:pointer;display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between}
+.it small{display:block;color:var(--m)}.pl{font-family:ui-monospace,monospace;background:var(--bg);padding:1px 6px;border-radius:5px}
+.bs{display:flex;flex-wrap:wrap;gap:4px;align-items:flex-start}
+.b{font-size:12px;padding:2px 8px;border-radius:99px;background:var(--bg);color:var(--m);white-space:nowrap}
+.b.ok{background:var(--okb);color:var(--ok)}.b.w{background:var(--wb);color:var(--w)}.b.e{background:var(--eb);color:var(--e)}
+.m{color:var(--m)}
+dialog{width:min(680px,96vw);max-height:92vh;border:1px solid var(--b);border-radius:12px;background:var(--bg);color:var(--t);padding:14px}
+dialog::backdrop{background:#0008}.dh{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}.dh b{font-size:17px}.dh button{width:auto}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}label{display:block;font-size:13px;color:var(--m)}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px 14px}.kv div span{display:block;font-size:12px;color:var(--m)}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:6px;border-bottom:1px solid var(--b)}.tw{overflow-x:auto}
+.ac{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.ac button{width:auto}
+.box{background:var(--c);border:1px solid var(--b);border-radius:10px;padding:10px;margin:8px 0}
+#toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--t);color:var(--bg);padding:9px 16px;border-radius:99px;z-index:99;max-width:92vw}
+#toast.e{background:var(--e);color:#fff}
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:8px 0}.hero .box{margin:0}.hero h4{margin:0 0 6px;font-size:12px;color:var(--m);text-transform:uppercase}.big{font-size:21px;font-weight:700;margin-top:4px}
+.pl2{font-family:ui-monospace,monospace}.orig{border-left:4px solid var(--p)}tr.o td{background:var(--bg);font-weight:600}td.n,th.n{text-align:right;white-space:nowrap}
+
+:root{--sh:0 1px 2px #0f172a14,0 6px 16px #0f172a0f}
+header{background:linear-gradient(135deg,#0f1b33,#1e3a6e);border:0;color:#fff}
+nav button{background:#ffffff18;border-color:#ffffff33;color:#fff}nav button.on{background:#fff;color:#0f1b33;font-weight:600}
+header .p{background:#22c55e;border-color:#22c55e;color:#052e12;font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.kpi{background:var(--c);border-radius:12px;padding:12px 14px;box-shadow:var(--sh)}.kpi b{display:block;font-size:26px;line-height:1.1}.kpi span{font-size:12px;color:var(--m)}
+.sec{margin:18px 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--m);font-weight:700}
+.card{border-radius:12px;box-shadow:var(--sh);border:0;border-top:4px solid var(--b)}.card.ok{border-top-color:var(--ok)}.card.w{border-top-color:#e0a100}.card.e{border-top-color:var(--e)}
+.card small{color:var(--m)}.pg{height:6px;border-radius:9px;background:var(--bg);overflow:hidden;margin-top:4px}.pg i{display:block;height:100%;background:var(--p)}.card.ok .pg i{background:var(--ok)}.card.w .pg i{background:#e0a100}.card.e .pg i{background:var(--e)}
+.att{background:var(--c);border-radius:12px;box-shadow:var(--sh);overflow:hidden}.att .row{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding:10px 12px;border-bottom:1px solid var(--b);cursor:pointer}.att .row:last-child{border:0}
+.it{box-shadow:var(--sh);border-radius:12px;border-left:5px solid var(--b);flex-direction:column;justify-content:flex-start;gap:6px}.u-ok{border-left-color:var(--ok)}.u-w{border-left-color:#e0a100}.u-e{border-left-color:var(--e)}
+.r1{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}.r1 .cl{font-weight:600;flex:1 1 140px}
+.chs{display:flex;flex-wrap:wrap;gap:6px}.ch{font-size:12px;background:var(--bg);border-radius:8px;padding:3px 8px}.ch em{font-style:normal;color:var(--m);margin-right:5px}.ch.e{background:var(--eb);color:var(--e)}.ch.w{background:var(--wb);color:var(--w)}.ch.ok{background:var(--okb);color:var(--ok)}
+.box,.hero .box{box-shadow:var(--sh);border-radius:12px}
+
+button.kpi{text-align:left;border:0;cursor:pointer;font:inherit;color:inherit}
+.dmain{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-top:6px}
+.ind{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;align-content:start}
+.gb{background:var(--c);border-radius:12px;box-shadow:var(--sh);padding:10px 12px;display:flex;flex-direction:column}
+.gb .sec,.pan .sec{margin:6px 0 8px}.gb .sec{margin-top:0}
+.gb .grid{grid-template-columns:repeat(auto-fit,minmax(88px,1fr));grid-auto-rows:1fr;flex:1}
+.gb .card{box-shadow:none;background:var(--bg);padding:10px 12px}.gb .card b{font-size:24px}
+@media(min-width:900px) and (min-height:620px){
+ main:has(#v-painel:not([hidden])){max-width:1500px;height:calc(100vh - var(--hh,57px));height:calc(100dvh - var(--hh,57px));padding:12px 16px;display:flex;flex-direction:column}
+ #v-painel{flex:1;min-height:0}
+ #cards{height:100%;display:flex;flex-direction:column;gap:10px}
+ .dmain{flex:1;min-height:0;grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-rows:minmax(0,1fr);margin:0}
+ .pan{display:flex;flex-direction:column;min-height:0}.pan .att{flex:1;overflow:auto}
+ .ind{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr);min-height:0;align-content:stretch}
+ .gb .card{overflow:hidden}.att .row{padding:7px 12px}
+ .gb{min-height:0;overflow:hidden}.gb .grid{min-height:0}
+ .gb .card{padding:8px 10px;gap:2px;overflow:hidden}.gb .card span{font-size:12px;line-height:1.2}.gb .card b{font-size:22px}
+}
+@media(min-width:900px) and (min-height:620px) and (max-height:780px){.gb .card small{display:none}}
+input[type=radio]{width:auto}fieldset.fs{grid-column:1/-1;border:1px solid var(--b);border-radius:8px;margin:0;padding:6px 10px}fieldset.fs legend{font-size:13px;color:var(--m);padding:0 4px}label.rd{display:flex;gap:8px;align-items:center;color:var(--t);margin:3px 0}
+details{margin-top:8px}summary{cursor:pointer;color:var(--p);font-size:13px}.al{font-size:12px;color:var(--m);padding:6px 0;border-bottom:1px solid var(--b)}.al b{color:var(--t)}
+
+#tt{position:fixed;z-index:200;max-width:260px;background:#0f1b33;color:#fff;font-size:12.5px;line-height:1.4;padding:8px 10px;border-radius:8px;box-shadow:0 6px 18px #0004;pointer-events:none}
+.card,.kpi{position:relative;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
+button.kpi{font:inherit;color:inherit;text-align:left;border:0;display:block;width:100%}
+.card:hover,.kpi:hover{transform:translateY(-2px);box-shadow:0 2px 4px #0f172a1a,0 10px 22px #0f172a22}
+.gb .card:hover{background:var(--c);box-shadow:0 0 0 1px var(--p),0 6px 14px #0f172a1a}
+.card:focus-visible,.kpi:focus-visible,.lnk:focus-visible,.back:focus-visible{outline:2px solid var(--p);outline-offset:2px}
+.card::after,.kpi::after{content:"›";position:absolute;right:10px;bottom:5px;font-size:18px;line-height:1;opacity:.3;transition:.15s}
+.card:hover::after,.kpi:hover::after{opacity:1;transform:translateX(3px);color:var(--p)}
+.inf{position:absolute;top:5px;right:6px;font-style:normal;font-size:13px;color:var(--m);opacity:.75;width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%}.inf:hover{background:var(--bg);color:var(--p);opacity:1}
+.card>span.m,.kpi>span{padding-right:18px}.att .row:hover{background:var(--bg)}
+.sh{display:flex;justify-content:space-between;align-items:center}.lnk{background:none;border:0;color:var(--p);font-size:12px;padding:0;font-weight:600;text-transform:none;letter-spacing:0;cursor:pointer}
+.back{background:var(--c);color:var(--p);border-color:var(--p);font-weight:600;padding:5px 10px;border-radius:8px;cursor:pointer}#chip{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+@media(min-width:900px) and (min-height:620px){.kpis{grid-template-columns:repeat(6,minmax(0,1fr))}.kpi{padding:9px 12px}.kpi b{font-size:24px}}
+button:disabled{opacity:.6;cursor:wait}
+.it{flex-wrap:nowrap}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--wm) center/min(70vmin,560px) no-repeat;opacity:.06}
+@media(prefers-color-scheme:dark){body::before{opacity:.08}}
+#prt{display:none}
+@media print{
+ body::before{display:none}
+ @page{margin:12mm}
+ body>*:not(#prt){display:none!important}
+ #prt{display:block}
+ :root{--bg:#fff;--c:#fff;--t:#111;--m:#555;--b:#cfd4dc;--p:#1f5fbf;--ok:#16794a;--okb:#dcf3e6;--w:#8a5a00;--wb:#fdf0cf;--e:#b3261e;--eb:#fbe0de}
+ body{background:#fff;color:#111}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .ph{display:flex;align-items:center;gap:14px;border-bottom:2px solid #111;padding-bottom:8px;margin-bottom:6px}
+ .ph img{height:64px;max-width:220px;object-fit:contain}.ph>div{display:flex;flex-direction:column;gap:2px}.ph b{font-size:19px}.ph small{color:#555}
+ #prt .box{box-shadow:none;border:1px solid var(--b);break-inside:avoid}#prt h3{break-after:avoid}#prt .tw{overflow:visible}#prt .hero{margin-top:6px}
+}
+</style></head><body>
+<header><h1>🔧 Checklist e Garantias</h1>
+<nav><button data-v="painel">Painel</button><button data-v="lista">Registros</button><button data-v="cfg">Ajustes</button></nav>
+<button class="p" id="novo">+ Novo serviço</button></header>
+<main>
+<section id="v-painel"><div id="cards"></div></section>
+<section id="v-lista" hidden>
+<div class="bar"><input id="q" type="search" placeholder="Placa (antiga ou Mercosul), cliente, OS, data ou serviço"><button id="tf">Filtros</button><button id="lc">Limpar</button></div>
+<div id="fil" class="grid f" hidden></div><div id="chip"></div><div id="res"></div></section>
+<section id="v-cfg" hidden>
+<h3>Mecânicos</h3><div class="bar"><input id="mn" data-up placeholder="Nome do mecânico"><button id="ma">Adicionar</button></div><div id="ml"></div>
+<h3>Usuários (quem lança os registros)</h3><div class="bar"><input id="un" data-up placeholder="Nome do usuário"><button id="ua">Adicionar</button></div><div id="ul"></div>
+<h3>Alertas e intervalo padrão</h3><form id="fc" class="fg">
+<label>Alerta de garantia (dias antes)<input type="number" name="alertaGarantia" min="0"></label>
+<label>Alerta de troca (km antes)<input name="alertaKm" data-km inputmode="numeric"></label>
+<label>Alerta de troca (dias antes)<input type="number" name="alertaDias" min="0"></label>
+<label>Intervalo padrão (km)<input name="intervalo" data-km inputmode="numeric"></label>
+<div><button class="p">Salvar</button></div></form></section>
+</main>
+
+<dialog id="dFicha"><div class="dh"><b id="fT"></b><span style="display:flex;gap:6px"><button id="pr" title="Imprimir esta ficha">🖨 Imprimir</button><button onclick="this.closest('dialog').close()" title="Fechar">✕</button></span></div><div id="fB"></div></dialog>
+
+<dialog id="dForm"><div class="dh"><b id="dfT"></b><button onclick="this.closest('dialog').close()">✕</button></div>
+<form id="fReg"><div class="fg">
+<label>Cliente *<input name="Cliente" data-up required autocomplete="off"></label>
+<label>Placa *<input name="Placa" data-pl required maxlength="8" autocomplete="off"></label>
+<label>Data do serviço *<input type="date" name="Data_Servico" required></label>
+<label>KM atual *<input name="KM" data-km inputmode="numeric" required></label>
+<label>Nº da OS *<input name="Ordem_Servico" required></label>
+<label>Serviço *<select name="Servico" required><option value="">Selecione</option><option>Motor</option><option>Caixa de marcha</option><option>Diferencial</option></select></label>
+<label>Tipo<select name="Tipo_Servico"></select></label>
+<label id="wPos">Diferencial traçado<select name="Posicao_Diferencial"><option>Dianteiro</option><option>Traseiro</option><option>Ambos</option></select></label>
+<label>Mecânico responsável pelo serviço *<select name="ID_Mecanico" required></select></label>
+<label>Checklist realizado?<select name="Checklist_Realizado"><option>Não</option><option>Sim</option></select></label>
+<fieldset id="wCk" class="fs"><legend>Quem está realizando o checklist?</legend><label class="rd"><input type="radio" name="Checklist_Proprio" value="SIM" checked> O próprio mecânico responsável pelo serviço</label><label class="rd"><input type="radio" name="Checklist_Proprio" value="NÃO"> Outra pessoa</label></fieldset>
+<label id="wRc">Responsável pelo checklist *<select name="ID_Responsavel_Checklist"></select></label>
+<label>Cliente recebeu acompanhamento?<select name="Acompanhamento_Entregue"><option>Não</option><option>Sim</option></select></label>
+<label id="wResp">Responsável<select name="Responsavel_Acompanhamento"><option>DONO</option><option>MOTORISTA</option><option>OUTRO</option></select></label>
+<label id="wNomeR">Nome do responsável<input name="Nome_Responsavel" data-up autocomplete="off"></label>
+<label>Garantia<select name="prazo"><option value="">Sem garantia</option><option value="3">3 meses</option><option value="6">6 meses</option><option value="12">1 ano</option><option value="c">Personalizado</option></select></label>
+<label id="wMes">Meses<input type="number" name="Meses" min="1"></label>
+</div><label style="margin-top:10px"><span id="lbOp">Lançado por *</span><select name="ID_Operador" required></select></label><p class="m" id="pLanc"></p><p class="m" id="ph"></p><p class="m" id="pv"></p>
+<label>Observações<textarea name="Observacoes" rows="2"></textarea></label>
+<div class="box"><label style="color:var(--t)"><input type="checkbox" name="oleo_ativo"> Acompanhar próxima troca de óleo</label>
+<div id="wOleo" class="fg" style="margin-top:8px">
+<label>Controle por<select name="Tipo"><option>KM</option><option>Data</option><option>KM e Data</option></select></label>
+<label>Intervalo<select name="ints"><option>10000</option><option>15000</option><option>20000</option><option value="c">Personalizado</option></select></label>
+<label id="wIc">Intervalo (km)<input name="intc" data-km inputmode="numeric"></label>
+<label>Data prevista<input type="date" name="Data_Prevista"></label></div><p class="m" id="pk"></p></div>
+<div class="ac"><button class="p">Salvar</button></div></form></dialog>
+
+<dialog id="dTroca"><div class="dh"><b>Registrar retorno – troca de óleo</b><button onclick="this.closest('dialog').close()">✕</button></div>
+<p id="tInfo" class="m"></p>
+<form id="fTr"><div class="fg">
+<label>Data do retorno *<input type="date" name="data" required></label>
+<label>Nº da OS do retorno *<input name="os" required autocomplete="off"></label>
+<label>KM na chegada *<input name="km" data-km inputmode="numeric" required></label>
+<label>Intervalo da próxima troca (km)<input name="intervalo" data-km inputmode="numeric"></label>
+<label>Nova data prevista<input type="date" name="dataPrevista"></label></div>
+<p id="tPv" style="font-weight:600"></p>
+<label>Observações<textarea name="obs" rows="2"></textarea></label>
+<div class="ac"><button class="p">Registrar troca</button></div></form></dialog>
+<div id="prt"></div>
+<div id="toast" hidden></div>
+
+<script>
+const TIPOS={'Motor':['Completo','Parcial'],'Caixa de marcha':['Automático','Manual'],'Diferencial':['Simples','Traçado']};
+const S={reg:[],mec:[],usr:[],cfg:{},hoje:'',card:null,cn:'',edit:'',cur:'',ac:null};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const D=s=>{s=String(s||'');const m=s.match(/^(\d{4})-(\d{2})-(\d{2})/);return m?`${m[3]}/${m[2]}/${m[1]}`:(s.slice(0,10)||'—')};
+const HM=s=>{const m=String(s||'').match(/(\d{2}:\d{2})/);return m?m[1]:''};
+const K=n=>n===''||n==null||isNaN(+n)?'—':String(Math.round(+n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+const kn=s=>+String(s||'').replace(/\D/g,'')||0;
+const UP=s=>String(s||'').toLocaleUpperCase('pt-BR');
+const fmtP=p=>{p=String(p||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,7);return /^[A-Z]{3}\d{4}$/.test(p)?p.slice(0,3)+'-'+p.slice(3):p};
+const cls=s=>/Vigente|Dentro|realizada/.test(s)?'ok':/Próxim/.test(s)?'w':/Vencida|atrasada/.test(s)?'e':'';
+const bd=s=>`<span class="b ${cls(s)}">${esc(s)}</span>`;
+const bs=(l,v)=>`<span class="b ${v==='Sim'?'ok':'e'}">${l}: ${v==='Sim'?'Sim':'Não'}</span>`;
+const nrm=p=>{p=String(p||'').toUpperCase().replace(/[^A-Z0-9]/g,'');if(p.length>=5&&/[A-J]/.test(p[4]))p=p.slice(0,4)+'ABCDEFGHIJ'.indexOf(p[4])+p.slice(5);return p};
+const qs=s=>String(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+const vars=p=>{p=qs(p);const o=[p];if(p.length===7){const c=p[4];if(/\d/.test(c))o.push(p.slice(0,4)+'ABCDEFGHIJ'[c]+p.slice(5));else if(/[A-J]/.test(c))o.push(p.slice(0,4)+'ABCDEFGHIJ'.indexOf(c)+p.slice(5))}return o};
+const hit=(p,q)=>vars(p).some(v=>v.includes(q));
+const addM=(s,n)=>{const[y,m,d]=s.split('-').map(Number),x=new Date(Date.UTC(y,m-1+n,1)),u=new Date(Date.UTC(x.getUTCFullYear(),x.getUTCMonth()+1,0)).getUTCDate();x.setUTCDate(Math.min(d,u));return x.toISOString().slice(0,10)};
+// Cole aqui a URL do app da Web (termina em /exec). Se o Index rodar dentro do próprio Apps Script, ela não é usada.
+const URL_IMPLANTACAO='https://script.google.com/macros/s/AKfycbylBjsZRfc2BfbiB_lDWSKrq-0DIMYIgqTft5Xq5D5jsZU5xg0Amu8E2RVM2SWKtApM/exec';
+// Logo que sai no canto superior esquerdo da impressão (arquivo na pasta img, ao lado deste Index.html).
+const LOGO_URL='img/logo_castelao.png';
+document.documentElement.style.setProperty('--wm','url("'+LOGO_URL+'")'); // marca d'água de fundo
+const api=(f,...a)=>typeof google!=='undefined'&&google.script&&google.script.run
+  ?new Promise((ok,no)=>google.script.run.withSuccessHandler(ok).withFailureHandler(no)[f](...a))
+  :fetch(URL_IMPLANTACAO,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({fn:f,args:a})})
+    .then(r=>r.json()).then(d=>{if(d.error)throw new Error(d.error);return d.result});
+function toast(m,e){const t=$('#toast');t.textContent=m;t.className=e?'e':'';t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,3500)}
+const run=async fn=>{try{return await fn()}catch(e){toast(e.message||String(e),1)}};
+let busy=false;
+/** Executa uma ação por vez: enquanto uma estiver em andamento, novos cliques/Enter são ignorados e os botões ficam bloqueados. */
+async function trava(fn,btns){if(busy)return false;busy=true;btns=btns||[];btns.forEach(b=>{b.disabled=true;b.dataset.t=b.textContent;b.textContent='Salvando…'});
+  try{return await fn()}finally{busy=false;btns.forEach(b=>{b.disabled=false;b.textContent=b.dataset.t})}}
+const botoes=()=>[...document.querySelectorAll('dialog[open] button.p,#ma,#ua')];
+async function enviar(fn,o,dlg){return trava(async()=>{
+  const r=await run(async()=>{let r=await api(fn,o,false);if(r.confirmar&&confirm(r.msg+'\n\nConfirmar mesmo assim?'))r=await api(fn,o,true);return r});
+  if(!r||!r.ok){if(r&&!r.confirmar)toast(r.msg,1);return false}
+  toast(r.msg||'Salvo');if(dlg)dlg.close();await load();return true},botoes())}
+const CARDS=[['Total de serviços',r=>1],['Checklists realizados',r=>r.Checklist_Realizado==='Sim'],['Checklists não realizados',r=>r.Checklist_Realizado!=='Sim'],
+['Acompanhamentos entregues',r=>r.Acompanhamento_Entregue==='Sim'],['Acompanhamentos não entregues',r=>r.Acompanhamento_Entregue!=='Sim'],
+['Garantias vigentes',r=>r.garantia==='Vigente'],['Garantias próximas do vencimento',r=>r.garantia==='Próxima do vencimento'],['Garantias vencidas',r=>r.garantia==='Vencida'],
+['Trocas de óleo próximas',r=>r.oleo==='Próximo da troca'],['Trocas de óleo atrasadas',r=>r.oleo==='Troca atrasada']];
+const ckNome=r=>r.Checklist_Realizado!=='Sim'?'':r.Checklist_Proprio==='SIM'?r.NomeMec:(r.Nome_Responsavel_Checklist||'');
+const SIM=['Sim','Não'];
+const FIL=[['dI','Data inicial','date',0,(r,v)=>r.Data_Servico>=v],['dF','Data final','date',0,(r,v)=>r.Data_Servico<=v],
+['cli','Cliente','text',0,(r,v)=>r.Cliente.toLowerCase().includes(v.toLowerCase())],['pl','Placa','text',0,(r,v)=>r.PlacasN.some(p=>hit(p,qs(v)))],
+['os','Ordem de serviço','text',0,(r,v)=>r.Ordem_Servico.includes(v)],['sv','Serviço','sel',Object.keys(TIPOS),(r,v)=>r.Servico===v],
+['tp','Tipo do serviço','sel',[...new Set(Object.values(TIPOS).flat())],(r,v)=>r.Tipo_Servico===v],['me','Mecânico do serviço','sel',[],(r,v)=>r.NomeMec===v],['rc','Checklist feito por','sel',[],(r,v)=>ckNome(r)===v],['lp','Lançado por','sel',[],(r,v)=>r.Nome_Usuario_Lancamento===v],
+['ck','Checklist','sel',SIM,(r,v)=>(r.Checklist_Realizado==='Sim')===(v==='Sim')],['ac','Acompanhamento entregue','sel',SIM,(r,v)=>(r.Acompanhamento_Entregue==='Sim')===(v==='Sim')],
+['ga','Garantia','sel',['Vigente','Próxima do vencimento','Vencida'],(r,v)=>r.garantia===v],
+['ol','Troca de óleo','sel',['Dentro do prazo','Próximo da troca','Troca atrasada','Troca realizada'],(r,v)=>r.oleo===v]];
+$('#fil').innerHTML=FIL.map(f=>`<label>${f[1]}${f[2]==='sel'?`<select id="f_${f[0]}"><option value="">Todos</option>${f[3].map(o=>`<option>${o}</option>`).join('')}</select>`:`<input id="f_${f[0]}" type="${f[2]}">`}</label>`).join('');
+
+function go(v){TT.hidden=true;['painel','lista','cfg'].forEach(x=>$('#v-'+x).hidden=x!==v);document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));if(v==='lista')lista()}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{S.card=null;go(b.dataset.v)});
+$('#cards').onclick=e=>{if(e.target.closest('.inf'))return tip(e.target.closest('[data-tip]'),true);const a=e.target.closest('[data-id]');if(a)return ficha(a.dataset.id);const k=e.target.closest('[data-k]');if(k){const x=S.kp[+k.dataset.k];S.card=x[2];S.cn=x[0];return go('lista')}const b=e.target.closest('[data-i]');if(!b)return;S.card=CARDS[b.dataset.i][1];S.cn=CARDS[b.dataset.i][0];go('lista')};
+$('#tf').onclick=()=>$('#fil').hidden=!$('#fil').hidden;
+$('#lc').onclick=()=>{$('#q').value='';FIL.forEach(f=>$('#f_'+f[0]).value='');S.card=null;lista()};
+$('#v-lista').addEventListener('input',lista);
+$('#chip').onclick=e=>{if(e.target.closest('[data-back]')){S.card=null;go('painel')}else if(e.target.closest('.b')){S.card=null;lista()}};
+
+const dd=v=>/^\d{4}-\d{2}-\d{2}/.test(v||'')?Math.round((Date.parse(String(v).slice(0,10))-Date.parse(S.hoje))/864e5):null;
+const kmTxt=d=>d==null?'':d<0?'passou '+K(-d)+' km':'faltam '+K(d)+' km';
+const TIPS=['',
+ 'Serviços em que o checklist foi realizado. Clique para ver esses registros.',
+ 'Serviços sem checklist realizado, que ainda precisam ser conferidos. Clique para ver quais.',
+ 'Serviços em que o cliente já recebeu as orientações (acompanhamento). Clique para ver.',
+ 'Serviços em que o acompanhamento ainda não foi entregue ao cliente. Clique para ver.',
+ 'Garantias dentro do prazo e longe de vencer. Clique para ver os serviços.',
+ 'Garantias que vencem em breve (o prazo de alerta é configurável em Ajustes). Clique para ver.',
+ 'Garantias que já venceram. Clique para ver os serviços.',
+ 'Veículos próximos do KM ou da data previstos para a próxima troca de óleo. Clique para ver.',
+ 'Veículos que passaram do KM ou da data previstos para a troca de óleo. Clique para ver.'];
+function painel(){
+  const n=S.reg.length,c=i=>S.reg.filter(CARDS[i][1]).length,tone=['','ok','e','ok','e','ok','w','e','w','e'];
+  const stat=i=>{const v=c(i),p=n?Math.round(v*100/n):0;return `<button class="card ${tone[i]}" data-i="${i}" data-tip="${TIPS[i]}"><span class="m">${CARDS[i][0]}</span><em class="inf">ⓘ</em><b>${v}</b><div class="pg"><i style="width:${i?p:100}%"></i></div><small>${i?p+'% dos serviços':'registrados'}</small></button>`};
+  const G=[['Checklist',[1,2]],['Acompanhamento ao cliente',[3,4]],['Garantia',[5,6,7]],['Troca de óleo',[8,9]]];
+  const sc=r=>r.oleo==='Troca atrasada'?0:r.oleo==='Próximo da troca'?1:r.garantia==='Vencida'?2:r.garantia==='Próxima do vencimento'?3:9;
+  const all=S.reg.filter(r=>sc(r)<9).sort((a,b)=>sc(a)-sc(b)),at=all.slice(0,8);
+  const veic=new Set(S.reg.map(r=>r.ID_Veiculo||r.Placa)).size,ret=S.reg.reduce((t,r)=>t+r.trocas.length,0);
+  const ult={};S.reg.forEach(r=>{const k=r.ID_Veiculo||r.Placa;if(!ult[k]||r.Data_Servico>=ult[k].Data_Servico)ult[k]=r});const ultIds=new Set(Object.values(ult).map(r=>r.ID));
+  const pend=r=>/Dentro|Próximo|atrasada/.test(r.oleo),gar=r=>r.garantia==='Vigente'||r.garantia==='Próxima do vencimento';
+  S.kp=[['Serviços registrados',n,()=>true,'Quantidade total de serviços cadastrados no sistema. Clique para ver todos os registros.'],
+  ['Veículos',veic,r=>ultIds.has(r.ID),'Veículos diferentes atendidos (uma placa pode ter vários serviços). Clique para ver o serviço mais recente de cada um.'],
+  ['Retornos realizados',ret,r=>r.trocas.length>0,ret+' troca(s) de óleo registrada(s) em retornos de clientes, em '+S.reg.filter(r=>r.trocas.length).length+' serviço(s). Clique para ver os serviços que já tiveram retorno.'],
+  ['Retornos pendentes',S.reg.filter(pend).length,pend,'Veículos com troca de óleo em acompanhamento, aguardando o retorno do cliente. Clique para ver quem precisa voltar.'],
+  ['Em garantia',S.reg.filter(gar).length,gar,'Serviços ainda dentro do prazo de garantia, inclusive os perto de vencer. Clique para consultar os detalhes.'],
+  ['Precisam de atenção',all.length,r=>sc(r)<9,'Trocas de óleo atrasadas ou próximas e garantias vencidas ou perto de vencer. Clique para ver todos.']];
+  const kp=(l,v,i,t)=>`<button class="kpi" data-k="${i}" data-tip="${t}"><b>${v}</b><span>${l}</span><em class="inf">ⓘ</em></button>`;
+  const row=r=>{const ab=r.acomps.find(a=>a.Status!=='Troca realizada'),d=ab&&ab.KM_Previsto!==''?+ab.KM_Previsto-ab.kmAtual:null,g=dd(r.Data_Vencimento);
+    return `<div class="row" data-id="${r.ID}" data-tip="Clique para abrir a ficha completa deste serviço."><b class="pl">${esc(r.Placa)}</b><span style="flex:1 1 130px">${esc(r.Cliente)}</span>${/atrasada|Próximo/.test(r.oleo)?bd(r.oleo)+`<span class="m">${kmTxt(d)}${ab&&ab.Data_Prevista?' · '+D(ab.Data_Prevista):''}</span>`:''}${/Vencida|Próxima/.test(r.garantia)?bd(r.garantia)+`<span class="m">${g==null?'':g<0?'venceu há '+(-g)+' d':'em '+g+' d'}</span>`:''}</div>`};
+  const gb=g=>`<div class="gb"><div class="sec">${g[0]}</div><div class="grid">${g[1].map(stat).join('')}</div></div>`;
+  $('#cards').innerHTML=`<div class="kpis">${S.kp.map((k,i)=>kp(k[0],k[1],i,k[3])).join('')}</div>
+<div class="dmain"><div class="pan"><div class="sec sh"><span>Precisam de atenção${all.length>8?' (8 mais urgentes)':''}</span>${all.length>8?`<button class="lnk" data-k="5" data-tip="Abre a lista completa dos casos que precisam de atenção.">Ver todos (${all.length}) ›</button>`:''}</div><div class="att">${at.length?at.map(row).join(''):'<div class="row m">Nada pendente. Tudo em dia ✅</div>'}</div></div>
+<div class="ind">${G.map(gb).join('')}</div></div>`}
+function item(r,qt){
+  const ab=r.acomps.find(a=>a.Status!=='Troca realizada'),q=qs(qt),ka=ab?ab.kmAtual:+r.KM,g=dd(r.Data_Vencimento);
+  const d=ab&&ab.KM_Previsto!==''?+ab.KM_Previsto-ab.kmAtual:null;
+  const u=r.oleo==='Troca atrasada'||r.garantia==='Vencida'?'e':(r.oleo==='Próximo da troca'||r.garantia==='Próxima do vencimento')?'w':'ok';
+  const ant=q.length>=3&&!hit(r.Placa,q)?r.PlacasAnt.find(p=>hit(p,q)):'';
+  const ch=(l,v,t)=>`<span class="ch ${t||''}"><em>${l}</em>${v}</span>`;
+  const to=r.oleo==='Troca atrasada'?'e':r.oleo==='Próximo da troca'?'w':'';
+  const tg=r.garantia==='Vencida'?'e':r.garantia==='Próxima do vencimento'?'w':'';
+  return `<article class="it u-${u}" data-id="${r.ID}"><div class="r1"><b class="pl">${esc(r.Placa)}</b>${ant?`<span class="b w">placa anterior ${esc(ant)}</span>`:''}<span class="cl">${esc(r.Cliente)}</span><span class="bs">${bd(r.oleo)}${bd(r.garantia)}</span></div>
+<small>OS ${esc(r.Ordem_Servico)} · ${D(r.Data_Servico)} · ${esc(r.Servico)} ${esc(r.Tipo_Servico)}${r.Posicao_Diferencial?' '+esc(r.Posicao_Diferencial):''}</small>
+<div class="chs">${ch('KM atual',K(ka))}${ab?ch('Próxima troca',(ab.KM_Previsto!==''?K(ab.KM_Previsto)+' km ('+kmTxt(d)+')':'')+(ab.Data_Prevista?(ab.KM_Previsto!==''?' · ':'')+D(ab.Data_Prevista)+(dd(ab.Data_Prevista)<0?' (atrasada)':''):''),to):ch('Próxima troca','sem acompanhamento')}${r.Data_Vencimento?ch('Garantia','até '+D(r.Data_Vencimento)+(g==null?'':g<0?' · vencida há '+(-g)+' d':' · '+g+' d'),tg):''}${ch('Retornos',r.trocas.length)}${bs('Checklist',r.Checklist_Realizado)}${bs('Acomp.',r.Acompanhamento_Entregue)}</div></article>`}
+async function load(){const d=await run(()=>api('getDados'));if(!d)return;Object.assign(S,{reg:d.registros,mec:d.mecanicos,usr:d.usuarios,cfg:d.cfg,hoje:d.hoje});
+  [['me',S.mec],['rc',S.mec],['lp',S.usr]].forEach(([id,L])=>{const e=$('#f_'+id),v=e.value;e.innerHTML='<option value="">Todos</option>'+L.map(m=>`<option>${esc(m.Nome)}</option>`).join('');e.value=v});
+  painel();
+  lista();cfgView();if($('#dFicha').open)ficha(S.cur)}
+
+function lista(){
+  const qt=$('#q').value.trim().toLowerCase(),qn=nrm(qt);
+  $('#chip').innerHTML=S.card?`<button class="back" data-back data-tip="Volta ao painel inicial.">← Voltar ao painel</button> <span class="b w" style="cursor:pointer" data-tip="Remove o filtro e mostra todos os registros.">Filtro: ${S.cn} ✕</span>`:'';
+  const L=S.reg.filter(r=>{
+    if(S.card&&!S.card(r))return false;
+    if(qt&&!([r.Cliente,r.Ordem_Servico,r.Servico,r.Tipo_Servico,r.Data_Servico,D(r.Data_Servico),r.Placa].join(' ').toLowerCase().includes(qt)||(qs(qt).length>=3&&r.PlacasN.some(p=>hit(p,qs(qt))))))return false;
+    return FIL.every(f=>{const v=$('#f_'+f[0]).value.trim();return !v||f[4](r,v)})}).reverse();
+  $('#chip').innerHTML+=`<span class="m" style="margin-left:6px">${L.length} de ${S.reg.length} registros</span>`;
+  $('#res').innerHTML=L.length?L.map(r=>item(r,qt)).join(''):'<p class="m">Nenhum registro encontrado.</p>'}
+$('#res').onclick=e=>{const a=e.target.closest('[data-id]');if(a)ficha(a.dataset.id)};
+
+function resp(r){
+  const nm=x=>x?esc(x):'<span class="m">Não registrado (registro anterior)</span>';
+  const ck=r.Checklist_Realizado!=='Sim'?'<span class="m">Checklist não realizado</span>':r.Checklist_Proprio==='SIM'?esc(r.NomeMec)+' <span class="m">(o próprio mecânico)</span>':r.Nome_Responsavel_Checklist?esc(r.Nome_Responsavel_Checklist):'<span class="m">Não informado (registro anterior)</span>';
+  const kv=(l,v)=>`<div><span>${l}</span>${v}</div>`;
+  return `<h3>Responsáveis pelo serviço</h3><div class="box"><div class="kv">${kv('Mecânico responsável',nm(r.NomeMec))}${kv('Checklist realizado por',ck)}${kv('Lançado por',nm(r.Nome_Usuario_Lancamento))}${kv('Data do lançamento',r.Data_Lancamento?D(r.Data_Lancamento)+' às '+HM(r.Data_Lancamento):'—')}${r.Usuario_Ultima_Alteracao?kv('Última alteração por',esc(r.Usuario_Ultima_Alteracao))+kv('Data da alteração',D(r.Data_Ultima_Alteracao)+' às '+HM(r.Data_Ultima_Alteracao)):''}</div>${r.alteracoes.length?`<details><summary>Histórico de alterações (${r.alteracoes.length})</summary>${r.alteracoes.map(a=>`<div class="al"><b>${D(a.Data_Alteracao)} ${HM(a.Data_Alteracao)} · ${esc(a.Nome_Usuario)}</b><br>${esc(a.Resumo)}</div>`).join('')}</details>`:''}</div>`}
+function ficha(id){
+  const r=S.reg.find(x=>x.ID===id);if(!r)return;S.cur=id;
+  const kv=(l,v)=>`<div><span>${l}</span>${v==null||v===''?'—':v}</div>`;
+  const ab=r.acomps.find(a=>a.Status!=='Troca realizada');
+  const rs=t=>{if(t.Diferenca_KM==='')return esc(t.Resultado);const d=+t.Diferenca_KM;return d<0?`Faltavam ${K(-d)} km`:d?`Passou ${K(d)} km`:'No KM recomendado'};
+  $('#fT').innerHTML=`<span class="pl2">${esc(r.Placa)}</span> · OS ${esc(r.Ordem_Servico)}`;
+  $('#fB').innerHTML=`<div class="hero">
+<div class="box"><h4>Garantia</h4>${bd(r.garantia)}<div class="big">${D(r.Data_Vencimento)}</div><span class="m">${esc(r.Prazo_Garantia)||'Sem prazo'}</span></div>
+<div class="box"><h4>Próxima troca de óleo</h4>${ab?`${bd(ab.status)}<div class="big">${K(ab.KM_Previsto)} km</div><span class="m">KM atual ${K(ab.kmAtual)}${ab.Data_Prevista?' · até '+D(ab.Data_Prevista):''}</span><div class="ac"><button class="p" data-t="${ab.ID_Acompanhamento}">Registrar retorno</button><button data-k="${ab.ID_Acompanhamento}">Atualizar KM</button></div>`:'<span class="m">Sem acompanhamento em aberto</span>'}</div></div>
+<h3>Serviço original</h3><div class="box orig"><div class="kv">${kv('Cliente',esc(r.Cliente))}${kv('Data do serviço',D(r.Data_Servico))}${kv('KM no serviço',K(r.KM))}
+${kv('Serviço',esc(r.Servico)+' '+esc(r.Tipo_Servico)+(r.Posicao_Diferencial?' · '+esc(r.Posicao_Diferencial):''))}${kv('Checklist',bs('Realizado',r.Checklist_Realizado))}
+${kv('Acompanhamento',bs('Entregue',r.Acompanhamento_Entregue))}${kv('Responsável',esc(r.Responsavel_Acompanhamento)+(r.Nome_Responsavel?' · '+esc(r.Nome_Responsavel):''))}${ab?kv('Controle',esc(ab.Tipo_Controle)+' · '+K(ab.Intervalo_KM)+' km'):''}
+${r.PlacasAnt.length?kv('Placas anteriores',esc(r.PlacasAnt.join(', '))):''}${r.PlacaServico&&r.PlacaServico!==r.Placa?kv('Placa no serviço',esc(r.PlacaServico)):''}${kv('Veículo',`<span class="pl2">${esc(r.ID_Veiculo)}</span>`)}</div></div>
+${resp(r)}<h3>Histórico de retornos (${r.trocas.length})</h3><div class="tw"><table><tr><th>Data</th><th>OS</th><th class="n">KM</th><th class="n">Previsto</th><th class="n">Dif.</th><th>Resultado</th><th>Obs.</th></tr>
+<tr class="o"><td>${D(r.Data_Servico)}</td><td>${esc(r.Ordem_Servico)}</td><td class="n">${K(r.KM)}</td><td class="n">—</td><td class="n">—</td><td>Serviço original</td><td></td></tr>
+${r.trocas.map(t=>`<tr><td>${D(t.Data_Troca)}</td><td>${esc(t.Ordem_Servico)||'—'}</td><td class="n">${K(t.KM_Registrado)}</td><td class="n">${K(t.KM_Previsto)}</td><td class="n">${t.Diferenca_KM===''?'—':(+t.Diferenca_KM>0?'+':'')+K(t.Diferenca_KM)}</td><td>${rs(t)}</td><td>${esc(t.Observacoes)}</td></tr>`).join('')}</table></div>
+${r.Observacoes?`<h3>Observações</h3><p>${esc(r.Observacoes)}</p>`:''}<div class="ac"><button id="ed">Editar registro</button><button id="pl">Alterar placa</button></div>`;
+  if(!$('#dFicha').open)$('#dFicha').showModal()}
+$('#fB').onclick=e=>{const b=e.target.closest('button');if(!b)return;const r=S.reg.find(x=>x.ID===S.cur);
+  if(b.id==='ed'){$('#dFicha').close();openForm(r)}
+  if(b.id==='pl'){const n=prompt('Nova placa do veículo (atual: '+r.Placa+'):');if(n)enviar('alterarPlaca',{idVeiculo:r.ID_Veiculo,placa:fmtP(n)})}
+  if(b.dataset.t)openTroca(r.acomps.find(a=>a.ID_Acompanhamento===b.dataset.t),r);
+  if(b.dataset.k){const km=prompt('Nova quilometragem do veículo:');if(kn(km))enviar('atualizarKm',{idAcomp:b.dataset.k,km:kn(km)})}};
+
+// ----- formulário de serviço -----
+const F=()=>$('#fReg'),intv=f=>f.ints.value==='c'?kn(f.intc.value):+f.ints.value;
+function dyn(){const f=F(),s=f.Servico.value,o=TIPOS[s]||[],t=f.Tipo_Servico.value;
+  if(f.Tipo_Servico.dataset.s!==s){f.Tipo_Servico.innerHTML=o.map(x=>`<option>${x}</option>`).join('');f.Tipo_Servico.dataset.s=s;if(o.includes(t))f.Tipo_Servico.value=t}
+  $('#wPos').hidden=!(s==='Diferencial'&&f.Tipo_Servico.value==='Traçado');
+  $('#wCk').hidden=f.Checklist_Realizado.value!=='Sim';$('#wRc').hidden=$('#wCk').hidden||f.Checklist_Proprio.value!=='NÃO';$('#wResp').hidden=f.Acompanhamento_Entregue.value!=='Sim';$('#wNomeR').hidden=$('#wResp').hidden;
+  $('#wMes').hidden=f.prazo.value!=='c';$('#wOleo').hidden=!f.oleo_ativo.checked;$('#wIc').hidden=f.ints.value!=='c'||$('#wOleo').hidden;
+  const m=+(f.prazo.value==='c'?f.Meses.value:f.prazo.value)||0;const pq=nrm(f.Placa.value);let ph='';if(!S.edit&&pq.length>=7){const v=S.reg.find(r=>r.PlacasN.includes(pq));ph=v?`Veículo já cadastrado: ${v.Placa} · ${v.Cliente}${v.PlacasAnt.length?' (placas anteriores: '+v.PlacasAnt.join(', ')+')':''}`:'Placa sem cadastro: será criado um novo veículo. Se é o mesmo veículo com placa trocada, cancele, abra o veículo e use “Alterar placa”.'}$('#ph').textContent=ph;
+  $('#pv').textContent=f.Data_Servico.value&&m?'Vencimento da garantia: '+D(addM(f.Data_Servico.value,m)):'';
+  const iv=intv(f),km=kn(f.KM.value);$('#pk').textContent=f.oleo_ativo.checked&&f.Tipo.value!=='Data'&&km&&iv?'KM previsto da próxima troca: '+K(km+iv):''}
+F().addEventListener('input',dyn);
+function openForm(r){const f=F();f.reset();f.Tipo_Servico.dataset.s='';S.edit=r?r.ID:'';$('#dfT').textContent=r?'Editar serviço':'Novo serviço';
+  const opts=(L,sel,k)=>'<option value="">Selecione</option>'+L.filter(m=>m.Status==='Ativo'||m[k]===sel).map(m=>`<option value="${m[k]}">${esc(m.Nome)}</option>`).join('');
+  f.ID_Mecanico.innerHTML=opts(S.mec,r&&r.IDMec,'ID');f.ID_Responsavel_Checklist.innerHTML=opts(S.mec,r&&r.ID_Responsavel_Checklist,'ID');f.ID_Operador.innerHTML=opts(S.usr,'','ID_Usuario');
+  let lo='';try{lo=localStorage.getItem('op')||''}catch(e){}f.ID_Operador.value=S.usr.some(u=>u.ID_Usuario===lo&&u.Status==='Ativo')?lo:'';
+  $('#lbOp').textContent=r?'Alteração feita por *':'Lançado por *';
+  $('#pLanc').textContent=!S.usr.length?'Cadastre ao menos um usuário em Ajustes para poder salvar.':r?(r.Nome_Usuario_Lancamento?`Lançado por ${r.Nome_Usuario_Lancamento} em ${D(r.Data_Lancamento)} às ${HM(r.Data_Lancamento)} (informação preservada).`:'Lançamento original não registrado (registro anterior ao controle de responsáveis).'):'';
+  if(r){const fill=()=>[...f.elements].forEach(el=>{if(el.name&&r[el.name]!==undefined&&el.type!=='checkbox'&&el.type!=='radio')el.value=r[el.name]});
+    fill();dyn();fill();f.KM.value=K(r.KM);f.ID_Mecanico.value=r.IDMec;f.Checklist_Proprio.value=r.Checklist_Proprio==='NÃO'?'NÃO':'SIM';f.Responsavel_Acompanhamento.value=UP(r.Responsavel_Acompanhamento)||'DONO';const mm=parseInt(r.Prazo_Garantia)||0;f.prazo.value=[3,6,12].includes(mm)?mm:mm?'c':'';f.Meses.value=mm||'';
+    const ab=r.acomps.find(a=>a.Status!=='Troca realizada');if(ab){f.oleo_ativo.checked=true;f.Tipo.value=ab.Tipo_Controle;const i=ab.Intervalo_KM;f.ints.value=['10000','15000','20000'].includes(i)?i:'c';f.intc.value=K(i);f.Data_Prevista.value=ab.Data_Prevista}
+  }else f.Data_Servico.value=S.hoje;
+  dyn();$('#dForm').showModal()}
+$('#novo').onclick=()=>openForm();
+F().onsubmit=async e=>{e.preventDefault();const f=F(),o=Object.fromEntries(new FormData(f));
+  o.Meses=f.prazo.value==='c'?f.Meses.value:f.prazo.value;o.KM=kn(o.KM);o.Placa=fmtP(o.Placa);o.Cliente=UP(o.Cliente).trim();
+  if($('#wPos').hidden)o.Posicao_Diferencial='';if($('#wCk').hidden){o.Checklist_Proprio='';o.ID_Responsavel_Checklist=''}else if($('#wRc').hidden)o.ID_Responsavel_Checklist='';try{localStorage.setItem('op',o.ID_Operador)}catch(e){}if($('#wResp').hidden){o.Responsavel_Acompanhamento='';o.Nome_Responsavel=''}o.Nome_Responsavel=UP(o.Nome_Responsavel).trim();
+  o.oleo={ativo:f.oleo_ativo.checked,Tipo:o.Tipo,Intervalo:intv(f),Data_Prevista:o.Data_Prevista};if(S.edit){o.ID=S.edit;o.ID_Veiculo=(S.reg.find(x=>x.ID===S.edit)||{}).ID_Veiculo}
+  if(await enviar('salvarRegistro',o,$('#dForm'))&&S.edit)ficha(S.edit)};
+
+// ----- retorno de troca -----
+function openTroca(a,r){S.ac=a;const f=$('#fTr');f.reset();f.data.value=S.hoje;f.intervalo.value=K(a.Intervalo_KM);
+  $('#tInfo').innerHTML=`Serviço original: OS ${esc(r.Ordem_Servico)} · ${esc(r.Cliente)} · ${esc(r.Placa)}<br>KM previsto: ${K(a.KM_Previsto)} · Data prevista: ${D(a.Data_Prevista)}`;$('#tPv').textContent='';$('#dTroca').showModal()}
+$('#fTr').addEventListener('input',()=>{const k=kn($('#fTr').km.value),p=S.ac.KM_Previsto;if(!k||p===''){$('#tPv').textContent='';return}const d=k-p;$('#tPv').textContent=d<0?`Faltavam ${K(-d)} km`:d===0?'No KM recomendado':`Passou ${K(d)} km`});
+$('#fTr').onsubmit=async e=>{e.preventDefault();const o=Object.fromEntries(new FormData(e.target));o.idAcomp=S.ac.ID_Acompanhamento;o.km=kn(o.km);o.intervalo=kn(o.intervalo);o.os=o.os.trim();await enviar('registrarTroca',o,$('#dTroca'))};
+
+// ----- ajustes -----
+function cfgView(){$('#ul').innerHTML=S.usr.map(m=>`<div class="it" style="cursor:default"><span>${esc(m.Nome)} ${bd(m.Status==='Ativo'?'Vigente':'Inativo').replace('Vigente','Ativo')}</span><button data-u="${m.ID_Usuario}">${m.Status==='Ativo'?'Desativar':'Ativar'}</button></div>`).join('')||'<p class="m">Nenhum usuário cadastrado. Cadastre quem lança os registros.</p>';$('#ml').innerHTML=S.mec.map(m=>`<div class="it" style="cursor:default"><span>${esc(m.Nome)} ${bd(m.Status==='Ativo'?'Vigente':'Inativo').replace('Vigente','Ativo')}</span><button data-m="${m.ID}">${m.Status==='Ativo'?'Desativar':'Ativar'}</button></div>`).join('')||'<p class="m">Nenhum mecânico cadastrado.</p>';
+  [...$('#fc').elements].forEach(el=>{if(el.name&&document.activeElement!==el)el.value=el.dataset.km!==undefined?K(S.cfg[el.name]):S.cfg[el.name]})}
+$('#ma').onclick=async()=>{const n=$('#mn').value;if(await enviar('salvarMecanico',n,null))$('#mn').value=''};
+$('#ml').onclick=async e=>{const b=e.target.closest('[data-m]');if(b)await trava(async()=>{await run(()=>api('alternarMecanico',b.dataset.m));await load()},[b])};
+$('#fc').onsubmit=e=>{e.preventDefault();const f=e.target;trava(async()=>{const r=await run(()=>api('salvarConfig',Object.fromEntries([...new FormData(f)].map(([k,v])=>[k,kn(v)]))));if(r){toast(r.msg);await load()}},[$('#fc button')])};
+$('#ua').onclick=async()=>{if(await enviar('salvarUsuario',$('#un').value,null))$('#un').value=''};
+$('#un').addEventListener('keydown',e=>{if(e.key==='Enter')$('#ua').click()});
+$('#ul').onclick=async e=>{const b=e.target.closest('[data-u]');if(b)await trava(async()=>{await run(()=>api('alternarUsuario',b.dataset.u));await load()},[b])};
+$('#mn').addEventListener('keydown',e=>{if(e.key==='Enter')$('#ma').click()});
+
+document.addEventListener('input',e=>{const el=e.target,d=el.dataset;if(!d)return;
+  if(d.km!==undefined){const d0=el.value.slice(0,el.selectionStart).replace(/\D/g,'').length;el.value=K(el.value.replace(/\D/g,'').slice(0,9).replace(/^0+(?=\d)/,'')||'').replace('—','');
+    let n=0,i=0;if(d0)for(;i<el.value.length&&n<d0;i++)if(/\d/.test(el.value[i]))n++;el.setSelectionRange(i,i)}
+  else if(d.up!==undefined){const p=el.selectionStart;el.value=UP(el.value);el.setSelectionRange(p,p)}
+  else if(d.pl!==undefined)el.value=fmtP(el.value)},true);
+function imprimir(){
+  const r=S.reg.find(x=>x.ID===S.cur);if(!r)return;
+  const c=$('#fB').cloneNode(true);c.querySelectorAll('.ac,button').forEach(e=>e.remove());c.querySelectorAll('details').forEach(d=>d.open=true);
+  $('#prt').innerHTML=`<div class="ph"><img src="${LOGO_URL}" alt="" onerror="this.style.display='none'"><div><b>Ficha do serviço</b><span>${esc(r.Placa)} · OS ${esc(r.Ordem_Servico)} · ${esc(r.Cliente)}</span><small>Impresso em ${new Date().toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})}</small></div></div>`+c.innerHTML;
+  const im=$('#prt img'),ir=()=>setTimeout(()=>window.print(),50);if(im.complete)ir();else{im.addEventListener('load',ir);im.addEventListener('error',ir)}}
+$('#pr').onclick=imprimir;
+const TT=document.createElement('div');TT.id='tt';TT.setAttribute('role','tooltip');TT.hidden=true;document.body.appendChild(TT);
+function tip(el,pin){if(!el)return;TT.textContent=el.dataset.tip;TT.style.left='0px';TT.style.top='0px';TT.hidden=false;
+  const r=el.getBoundingClientRect(),t=TT.getBoundingClientRect(),x=Math.min(Math.max(8,r.left+r.width/2-t.width/2),innerWidth-t.width-8);let y=r.top-t.height-8;if(y<8)y=r.bottom+8;
+  TT.style.left=x+'px';TT.style.top=y+'px';TT.dataset.pin=pin?'1':'';clearTimeout(tip.h);if(pin)tip.h=setTimeout(()=>{TT.dataset.pin='';TT.hidden=true},4500)}
+const hideTip=()=>{if(!TT.dataset.pin)TT.hidden=true};
+document.addEventListener('mouseover',e=>{const el=e.target.closest&&e.target.closest('[data-tip]');if(el&&matchMedia('(hover:hover)').matches)tip(el);else hideTip()});
+document.addEventListener('mouseout',e=>{if(e.target.closest&&e.target.closest('[data-tip]'))hideTip()});
+document.addEventListener('focusin',e=>{const el=e.target.closest&&e.target.closest('[data-tip]');if(el)tip(el)});document.addEventListener('focusout',hideTip);
+document.addEventListener('click',e=>{if(TT.dataset.pin&&!e.target.closest('.inf')){TT.dataset.pin='';TT.hidden=true}},true);
+const hh=()=>document.documentElement.style.setProperty('--hh',$('header').offsetHeight+'px');addEventListener('resize',hh);hh();
+go('painel');load();
+</script></body></html>
