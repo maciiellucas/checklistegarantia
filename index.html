@@ -185,7 +185,7 @@ const vars=p=>{p=qs(p);const o=[p];if(p.length===7){const c=p[4];if(/\d/.test(c)
 const hit=(p,q)=>vars(p).some(v=>v.includes(q));
 const addM=(s,n)=>{const[y,m,d]=s.split('-').map(Number),x=new Date(Date.UTC(y,m-1+n,1)),u=new Date(Date.UTC(x.getUTCFullYear(),x.getUTCMonth()+1,0)).getUTCDate();x.setUTCDate(Math.min(d,u));return x.toISOString().slice(0,10)};
 // Cole aqui a URL do app da Web (termina em /exec). Se o Index rodar dentro do próprio Apps Script, ela não é usada.
-const URL_IMPLANTACAO='https://script.google.com/macros/s/AKfycbylBjsZRfc2BfbiB_lDWSKrq-0DIMYIgqTft5Xq5D5jsZU5xg0Amu8E2RVM2SWKtApM/exec';
+const URL_IMPLANTACAO='https://script.google.com/macros/s/AKfycbymaTftbqymjrv4Z9rN1ExAZwVeElrNUJ2sC75TGW_OeHR5PSPetINqozkhHQ18f8w-eQ/exec';
 // Logo que sai no canto superior esquerdo da impressão (arquivo na pasta img, ao lado deste Index.html).
 const LOGO_URL='img/logo_castelao.png';
 document.documentElement.style.setProperty('--wm','url("'+LOGO_URL+'")'); // marca d'água de fundo
